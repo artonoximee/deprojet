@@ -5,6 +5,9 @@ import * as dat from 'lil-gui';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
+// Debug
+// const gui = new dat.GUI();
+
 // Textures
 const textureLoader = new THREE.TextureLoader();
 const matcapTexture = textureLoader.load('/textures/matcaps/matcap.png');
@@ -14,6 +17,8 @@ const canvas = document.querySelector('canvas.webgl');
 
 // Scene
 const scene = new THREE.Scene();
+// const axesHelper = new THREE.AxesHelper(2)
+// scene.add(axesHelper)
 
 // Material
 const material = new THREE.MeshMatcapMaterial();
@@ -34,10 +39,13 @@ gltfLoader.load(
   '/models/deprojet.glb',
   (gltf) => {
     model = gltf.scene;
+    model.scale.set(1, 1, 1);
+    model.rotation.x = Math.random() * Math.PI * 2;
+    model.rotation.y = Math.random() * Math.PI * 2;
+    // gui.add(model.rotation, 'x').min(0).max(Math.PI * 2).step(0.01)
     model.traverse((o) => {
       if (o.isMesh) o.material = material;
     });
-    model.scale.set(1, 1, 1);
     scene.add(model);
   }
 )
@@ -80,10 +88,10 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const clock = new THREE.Clock();
 
 function tick() {
-  const elapsedTime = clock.getElapsedTime();
+  // const elapsedTime = clock.getElapsedTime();
   // Rotate model
-  if (model) model.rotation.y = 0.1 * elapsedTime;
-  if (model) model.rotation.x = 0.1 * elapsedTime;
+  if (model) model.rotation.y += 0.003;
+  if (model) model.rotation.x += 0.003;
   // Update controls
   controls.update();
   // Render
