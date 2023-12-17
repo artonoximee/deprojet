@@ -21,9 +21,9 @@ const scene = new THREE.Scene();
 // scene.add(axesHelper)
 
 // Material
-const material = new THREE.MeshMatcapMaterial();
+const material = new THREE.MeshBasicMaterial()
 material.side = THREE.DoubleSide;
-material.matcap = matcapTexture;
+// material.matcap = matcapTexture;
 
 // gtlf Loader
 const dracoLoader = new DRACOLoader();
@@ -39,7 +39,7 @@ gltfLoader.load(
   '/models/deprojet.glb',
   (gltf) => {
     model = gltf.scene;
-    model.scale.set(1, 1, 1);
+    model.scale.set(1.5, 1.5, 1.5);
     model.rotation.x = Math.random() * Math.PI * 2;
     model.rotation.y = Math.random() * Math.PI * 2;
     // gui.add(model.rotation, 'x').min(0).max(Math.PI * 2).step(0.01)
