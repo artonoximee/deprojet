@@ -36,10 +36,10 @@ gltfLoader.setDRACOLoader(dracoLoader);
 let model;
 
 gltfLoader.load(
-  '/models/deprojet.glb',
+  '/models/deprojeterretisser.glb',
   (gltf) => {
     model = gltf.scene;
-    model.scale.set(1.5, 1.5, 1.5);
+    model.scale.set(0.15, 0.15, 0.15);
     model.rotation.x = Math.random() * Math.PI * 2;
     model.rotation.y = Math.random() * Math.PI * 2;
     // gui.add(model.rotation, 'x').min(0).max(Math.PI * 2).step(0.01)
@@ -69,7 +69,7 @@ window.addEventListener('resize', () => {
 });
 
 // Camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
+const camera = new THREE.PerspectiveCamera(1000, sizes.width / sizes.height, 0.1, 100);
 camera.position.set(0,0,20);
 scene.add(camera);
 
@@ -90,8 +90,8 @@ const clock = new THREE.Clock();
 function tick() {
   // const elapsedTime = clock.getElapsedTime();
   // Rotate model
-  if (model) model.rotation.y += 0.003;
-  if (model) model.rotation.x += 0.003;
+  if (model) model.rotation.y += 0.0015;
+  if (model) model.rotation.x += 0.0015;
   // Update controls
   controls.update();
   // Render
